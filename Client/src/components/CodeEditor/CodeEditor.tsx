@@ -1,47 +1,42 @@
 import React, { useState } from 'react';
-import styles from './CodeEditor.module.css';
+import styles from './CodeEditor.module.css'; // Asegúrate de tener los estilos CSS adecuados
 import { keywords } from './keywords';
 
 const CodeEditor: React.FC = () => {
   const [code, setCode] = useState<string>('');
+  let lines: string[] = [];
+  let linesOk: string[] = [];
 
   const handleCodeChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newCode = event.target.value;
-    setCode(newCode);
-  };
-
-  const highlightKeywords = (text: string): JSX.Element => {
-    const words = text.split(/\b/);
-    const highlightedText = words.map((word, index) => {
-      const upperCaseWord = word.toUpperCase(); // Convertir a mayúsculas
-      if (keywords.includes(upperCaseWord)) {
-        return (
-          <span key={index} className={styles.keyword}>
-            {upperCaseWord}
-          </span>
-        );
-      }
-      return word;
+    lines = event.target.value.split('\n');
+    linesOk = lines.map((line) => {
+      let updatedLine = line;
+      keywords.forEach(keyword => {
+        const regex = new RegExp(`\\b${keyword}\\b`, 'gi'); // \b para limitar a palabras completas y g para búsqueda global
+        updatedLine = updatedLine.replace(regex, keyword.toUpperCase());
+      });
+      return updatedLine;
     });
-
-    return <>{highlightedText}</>;
+    setCode(linesOk.join('\n'));
   };
+
+  const lineCount = code.split('\n').length;
+  const lineNumbers = Array.from({ length: lineCount }, (_, index) => index + 1).join('\n');
 
   return (
-    <div className={styles.codeEditor}>
+    <div className={styles.codeEditorContainer}>
+      {/* Numero de linea */}
       <textarea
         className={styles.lineNumbers}
-        value={code.split('\n').map((_, index) => `${index + 1}\n`).join('')}
         readOnly
+        value={lineNumbers}
       />
-      <div className={styles.codeContent}>
-        {highlightKeywords(code)}
-        <textarea
-          value={code}
-          onChange={handleCodeChange}
-          className={styles.hiddenTextArea}
-        />
-      </div>
+      {/* Editor de codigo */}
+      <textarea
+        className={styles.codeTextarea}
+        value={code}
+        onChange={handleCodeChange}
+      />
     </div>
   );
 };

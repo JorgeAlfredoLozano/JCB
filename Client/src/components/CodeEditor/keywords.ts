@@ -1,8 +1,10 @@
 export const keywords = [
     "LEER",
     "IMPRIMIR",
-    "REPETIR PARA",
-    "REPETIR MIENTRAS",
+    "REPETIR",
+    "PARA",
+    "FIN",
+    "MIENTRAS",
     "SI",
     "SINO",
     "INICIO",

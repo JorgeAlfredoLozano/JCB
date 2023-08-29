@@ -1,47 +1,27 @@
-.codeEditor {
-  display: flex;
-  align-items: stretch;
-}
-
-.codeContent {
-  flex: 1;
-  position: relative; /* Añadir esta propiedad */
-  padding: 10px;
-  white-space: pre-wrap;
-  resize: none;
-  border: none;
-  outline: none;
-  font-family: monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  height: 600px;
-}
-
-.lineNumbers {
-  flex: 0 0 auto;
-  width: 40px;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-left: 1px solid #ccc;
-  text-align: right;
-  font-family: monospace;
-  font-size: 14px;
-  resize: none;
-  border: none;
-  outline: none;
-  line-height: 1.5;
-}
-
-.keyword {
-  color: blue;
-  font-weight: bold;
-}
-
-.hiddenTextArea {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
+/* CodeEditor.module.css */
+.codeEditorContainer {
+    display: flex;
+    align-items: flex-start; 
+  }
+  
+  .lineNumbers {
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 80vh;
+    width: 40px;
+    resize: none;
+    text-align: right;
+  }
+  
+  .codeTextarea {
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 80vh;
+    width: 100vh;
+    resize: none;
+    padding-left: 1%;
+  }
+  
+  .keyword {
+    color: blue;
+  }
